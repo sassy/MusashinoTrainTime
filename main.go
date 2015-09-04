@@ -52,9 +52,19 @@ func departureTime(departure string) (int, int) {
 	return hour, minute
 }
 
+func getTimeTableUrl() string {
+	weekday := time.Now().Weekday().String()
+	if weekday == "Saturday" || weekday == "Sunday" {
+		return "http://www.jreast-timetable.jp/1509/timetable/tt0413/0413021.html"
+	} else {
+		return "http://www.jreast-timetable.jp/1509/timetable/tt0413/0413020.html"
+	}
+}
+
 func createTimetable() []Time {
 	var timetable = make([]Time, 0)
-	doc, _ := goquery.NewDocument("http://www.jreast-timetable.jp/1509/timetable/tt0413/0413020.html")
+	url := getTimeTableUrl()
+	doc, _ := goquery.NewDocument(url)
 	doc.Find(".timetable .result_03").Each(func(_ int, s *goquery.Selection) {
 		s.Find("tbody tr").Each(func(_ int, s *goquery.Selection) {
 			key, err := strconv.Atoi(s.Find("td:nth-child(1)").Text())
