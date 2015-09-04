@@ -2,6 +2,16 @@
 
 [![Build Status](https://travis-ci.org/sassy/MusashinoTrainTime.svg?branch=master)](https://travis-ci.org/sassy/MusashinoTrainTime)
 
-WIP
-* GO language
-* http://www.jreast-timetable.jp/1509/timetable/tt0413/0413020.html
+You want to search the starting time of Musashino Line (from Kaihin-Makuhari to Fuchu-Hommachi)
+
+# Install
+
+`go get github.com/sassy/MusashinoTrainTime`
+
+# Options
+
+`-t hh:mm` : specify depature time.
+
+`-n n` : display times of n pieces. (default 3)
+
+`-l` : display last train time.
