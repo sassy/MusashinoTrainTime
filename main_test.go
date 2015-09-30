@@ -79,3 +79,10 @@ func TestToString2(t *testing.T) {
 		t.Error("got %v, wrong Format", ret)
 	}
 }
+
+func TestCreateTimetable(t *testing.T) {
+	timetable := createTimetable()
+	if len(timetable) == 0 {
+		t.Error("Timetable is nil. Current URL may be out of date.")
+	}
+}
