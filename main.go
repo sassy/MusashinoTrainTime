@@ -59,9 +59,9 @@ func departureTime(departure string) Time {
 func getTimeTableUrl() string {
 	weekday := time.Now().Weekday().String()
 	if weekday == "Saturday" || weekday == "Sunday" {
-		return "http://www.jreast-timetable.jp/1512/timetable/tt0413/0413021.html"
+		return "http://www.jreast-timetable.jp/1612/timetable/tt0413/0413021.html"
 	} else {
-		return "http://www.jreast-timetable.jp/1512/timetable/tt0413/0413020.html"
+		return "http://www.jreast-timetable.jp/1612/timetable/tt0413/0413020.html"
 	}
 }
 
