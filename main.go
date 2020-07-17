@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"strconv"
 	"time"
+	"strings"
 )
 
 const (
@@ -59,10 +60,14 @@ func departureTime(departure string) Time {
 func getTimeTableUrl() string {
 	weekday := time.Now().Weekday().String()
 	if weekday == "Saturday" || weekday == "Sunday" {
-		return "http://www.jreast-timetable.jp/1612/timetable/tt0413/0413021.html"
+		return "http://www.jreast-timetable.jp/2007/timetable/tt0413/0413021.html"
 	} else {
-		return "http://www.jreast-timetable.jp/1612/timetable/tt0413/0413020.html"
+		return "https://www.jreast-timetable.jp/2007/timetable/tt0413/0413020.html"
 	}
+}
+
+func convertTimeToNumString(hour string) string {
+	return strings.Replace(hour, "時", "", 1)
 }
 
 func createTimetable() []Time {
@@ -71,7 +76,7 @@ func createTimetable() []Time {
 	doc, _ := goquery.NewDocument(url)
 	doc.Find(".timetable .result_03").Each(func(_ int, s *goquery.Selection) {
 		s.Find("tbody tr").Each(func(_ int, s *goquery.Selection) {
-			key, err := strconv.Atoi(s.Find("td:nth-child(1)").Text())
+			key, err := strconv.Atoi(convertTimeToNumString(s.Find("td:nth-child(1)").Text()))
 			if err == nil {
 				s.Find("td:nth-child(2) div.timetable_time[data-dest='府']").Each(func(_ int, s *goquery.Selection) {
 					value, _ := strconv.Atoi(s.Find(".minute").Text())
