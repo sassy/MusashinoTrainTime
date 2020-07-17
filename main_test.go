@@ -65,10 +65,10 @@ func TestDepartureTime7(t *testing.T) {
 }
 
 func TestToString(t *testing.T) {
-	value := Time{8, 8}
+	value := Time{hour: 8, minute: 8}
 	ret := value.toString()
 	if ret != "8:08 " {
-		t.Error("got %v, wrong Format", ret)
+		t.Errorf("got %v, wrong Format", ret)
 	}
 }
 
@@ -76,7 +76,7 @@ func TestToString2(t *testing.T) {
 	value := Time{10, 10}
 	ret := value.toString()
 	if ret != "10:10 " {
-		t.Error("got %v, wrong Format", ret)
+		t.Errorf("got %v, wrong Format", ret)
 	}
 }
 
